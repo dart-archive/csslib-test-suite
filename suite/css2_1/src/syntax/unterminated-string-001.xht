@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>CSS Test: Error handling of unterminated strings</title>
+        <link rel="author" title="Microsoft" href="http://www.microsoft.com/" />
+        <link rel="help" href="http://www.w3.org/TR/CSS21/syndata.html#parsing-errors" />
+        <meta name="flags" content="invalid" />
+        <meta name="assert" content="When the parser encounters an unterminated string,.he parser drops everything up to the next ';'." />
+        <style type="text/css">
+            div
+            {
+                color: green;
+                font-family: 'Courier;
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <p>Test passes if the "Filler Text" below is green.</p>
+        <div>Filler Text</div>
+    </body>
+</html>
