@@ -11,6 +11,8 @@ The suite of tests is normally used to validate CSS rendering in a browser.
 This library uses the tests to validate CSS parsing and CSS' representation in
 a AST to ensure valid CSS is accepted.
 
+[![Build Status](https://drone.io/github.com/dart-lang/csslib-test-suite/status.png)](https://drone.io/github.com/dart-lang/csslib-test-suite/latest)
+
 Running All Tests
 -----------------
 
