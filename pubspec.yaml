@@ -2,6 +2,8 @@ name: csslib_test_suite
 author: "Dart Team <misc@dartlang.org>"
 homepage: https://github.com/dart-lang/csslib-test-suite
 description: CSS parsing test suite (originated from W3C).
-version: 0.3.0
+version: 0.3.0+1
 dependencies:
   csslib: any
+  html5lib: any
+  
