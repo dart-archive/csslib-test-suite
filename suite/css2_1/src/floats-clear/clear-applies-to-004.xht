@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>CSS Test: Clear applied to element with 'display' set to 'table-row'</title>
+        <link rel="author" title="Microsoft" href="http://www.microsoft.com/" />
+        <link rel="reviewer" title="Gérard Talbot" href="http://www.gtalbot.org/BrowserBugsSection/css21testsuite/" /> <!-- 2012-05-01 -->
+        <link rel="help" href="http://www.w3.org/TR/CSS21/visuren.html#propdef-clear" />
+        <link rel="help" href="http://www.w3.org/TR/CSS21/visuren.html#flow-control" />
+        <link rel="match" href="clear-applies-to-001-ref.xht" />
+
+        <meta name="flags" content="" />
+        <meta name="assert" content="The 'clear' property does not apply to elements with a display of 'table-row'." />
+        <style type="text/css">
+            p
+            {
+                float: left;
+                line-height: 1.25;
+                margin: 1em 0;
+            }
+            #test
+            {
+                background: green;
+                display: table-row;
+                clear: both;
+            }
+            #table,#cell
+            {
+                height: 1in;
+                width: 1in;
+            }
+            #table
+            {
+                display: table;
+                table-layout: fixed;
+            }
+            #cell
+            {
+                display: table-cell;
+            }
+        </style>
+    </head>
+    <body>
+        <p>Test passes if there is a box to the right of this text.</p>
+        <div id="table">
+            <div id="test">
+                <div id="cell"></div>
+            </div>
+        </div>
+    </body>
+</html>

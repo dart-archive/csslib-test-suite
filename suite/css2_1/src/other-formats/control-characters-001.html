@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>CSS Test: Control Characters between (00 and 1F)</title>
+        <link rel="author" title="Microsoft" href="http://www.microsoft.com/" />
+        <link rel="help" href="http://www.w3.org/TR/CSS21/text.html#spacing-props" />
+        <meta name="flags" content="HTMLonly" />
+        <meta name="assert" content="Handling and processing of control characters." />
+        <style type="text/css">
+            div
+            {
+                border: 1px solid black;
+                height: 1.2em;
+                padding-left: 1em;
+            }
+        </style>
+    </head>
+    <body>
+        <p>Test passes if there is only a single character in each box below or the box is empty.</p>
+        <!-- C0 Control Characters -->
+        <div>&#x20;</div>
+        <div>&#x21;</div>
+        <div>&#x22;</div>
+        <div>&#x23;</div>
+        <div>&#x24;</div>
+        <div>&#x25;</div>
+        <div>&#x26;</div>
+        <div>&#x27;</div>
+        <div>&#x28;</div>
+        <div>&#x2B;</div>
+        <div>&#x2C;</div>
+        <div>&#x2E;</div>
+        <div>&#x2F;</div>
+        <div>&#x30;</div>
+        <div>&#x31;</div>
+        <div>&#x32;</div>
+        <div>&#x33;</div>
+        <div>&#x34;</div>
+        <div>&#x35;</div>
+        <div>&#x36;</div>
+        <div>&#x37;</div>
+        <div>&#x38;</div>
+        <div>&#x39;</div>
+        <div>&#x3A;</div>
+        <div>&#x3B;</div>
+        <div>&#x3C;</div>
+        <div>&#x3D;</div>
+        <div>&#x3E;</div>
+        <div>&#x3F;</div>
+    </body>
+</html>
