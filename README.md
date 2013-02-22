@@ -35,7 +35,7 @@ Running a set of tests
 
 To run an particular set of tests
 ```bash
-dart test/suite/selectors3/selectors3_test.dart
+dart suite/selectors3/selectors3_test.dart
 ```
 
 Tests Suite Infrastructure
