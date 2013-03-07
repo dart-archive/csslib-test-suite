@@ -227,62 +227,68 @@ class Suite {
     suiteDir = new Directory('${currDir.path}/${options.dir}/$processDir');
   }
 
-  processTests(Map<String, Object> exceptionMatches) {
-    if (suiteDir.existsSync()) {
-      if (options.verbose) {
-        out.display("$processDir", "Processing Suite  :   ");
+  /** Prepare to process a test file. */
+  void _processFile(File path, Map<String, Object> exceptionMatches) {
+    expect(path.existsSync(), true, reason: "File ${path} must exist");
+    Path filePath = new Path(path.fullPathSync());
+    File file = new File.fromPath(filePath);
+    if (filePath.extension == 'xht' || filePath.extension == 'html' ||
+        filePath.extension == 'xml') {
+      var expectedOutput = exceptionMatches[filePath.filename];
+      if (expectedOutput != null) {
+        // If cssToMatch is equal to SKIP_TEST then skip this test.
+        if (expectedOutput != null && expectedOutput == SKIP_TEST) {
+          validTestsSkipped.add(filePath.filename);
+          return;
+        }
       }
-      var lister = suiteDir.list(recursive: true);
 
-      // Process each file.
-      lister.onFile = (path) {
-        Path filePath = new Path(path);
-        File file = new File.fromPath(filePath);
-        if (file.existsSync()) {
-          if (filePath.extension == 'xht' || filePath.extension == 'html' ||
-              filePath.extension == 'xml') {
-            var expectedOutput;
-            if (exceptionMatches.containsKey(filePath.filename)) {
-              expectedOutput = exceptionMatches[filePath.filename];
-              // If cssToMatch is equal to SKIP_TEST then skip this test.
-              if (expectedOutput != null && expectedOutput == SKIP_TEST) {
-                validTestsSkipped.add(filePath.filename);
-                return;
-              }
-            }
-
-            _processTestFile(file, filePath, expectedOutput);
-          }
-        }
-      };
-
-      // Signal when all files processed.
-      lister.onDone = (completed) {
-        if (options.verbose) {
-          var testSkipped = validTestsSkipped.length == 0 ? "" :
-              " SKIPPING [${validTestsSkipped.length}]";
-          out.displayLine(
-              "RUNNING [${testsRunning.length}]$testSkipped: $processDir",
-              true);
-        }
-        if (validTestsSkipped.length > 0 &&
-            (options.verbose || options.displaySkippedTests)) {
-          out.displayLine(
-              "Tests Skipped [${validTestsSkipped.length}]  "
-              "$processDir: ${validTestsSkipped.toString()}",
-              true);
-        }
-      };
-
-      out.displayLine("", true);
-    } else {
-      // Failure the test directory doesn't exist.
-      expect(false, true,
-          reason: "Test directory '${suiteDir.path}' doesn't exist");
+      _processTestFile(file, filePath, expectedOutput);
     }
   }
 
-  _processTestFile(File file, Path filePath, [var cssMatch]) {
+  /** Process all files in any test suite subdirectory. */
+  void _processDirectory(Directory dir, Map<String, Object> exceptionMatches) {
+    expect(dir.existsSync(), true, reason: "Directory ${dir.path} must exist");
+    var lister = dir.listSync(recursive: true);
+
+    for (var path in lister) {
+      if (path is File) {
+        _processFile(path, exceptionMatches);
+      } else {
+        _processDirectory(path, exceptionMatches);
+      }
+    };
+  }
+
+  /** Run all tests in the test suite directory. */
+  void processTests(Map<String, Object> exceptionMatches) {
+    if (options.verbose) {
+      out.display("$processDir", "Processing Suite ${suiteDir.path} :   ");
+    }
+
+    _processDirectory(suiteDir, exceptionMatches);
+
+    // Signal when all files processed.
+    if (options.verbose) {
+      var testSkipped = validTestsSkipped.length == 0 ? "" :
+          " SKIPPING [${validTestsSkipped.length}]";
+      out.displayLine(
+          "RUNNING [${testsRunning.length}]$testSkipped: $processDir",
+          true);
+    }
+    if (validTestsSkipped.length > 0 &&
+        (options.verbose || options.displaySkippedTests)) {
+      out.displayLine(
+          "Tests Skipped [${validTestsSkipped.length}]  "
+          "$processDir: ${validTestsSkipped.toString()}",
+          true);
+    }
+
+    out.displayLine("", true);
+  }
+
+  void _processTestFile(File file, Path filePath, [var cssMatch]) {
     String contents = file.readAsStringSync();
 
     // Parses an HTML file and returns a DOM-like tree.
@@ -308,7 +314,7 @@ class Suite {
     });
   }
 
-  finished(SuiteTest test) {
+  void finished(SuiteTest test) {
     if (!test.checked) {
       uncheckedRun++;
     }
