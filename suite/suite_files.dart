@@ -62,7 +62,6 @@ class SuiteTest {
   final String directoryName;
 
   bool checked = true;
-  var cssErrors = [];
 
   SuiteTest(Path fPath, this.document, this.expectedCss)
       : filePath = fPath, directoryName = fPath.directoryPath.toString();
@@ -98,17 +97,17 @@ class SuiteTest {
     var parsedCssBuff = new StringBuffer();
     for (var style in styles) {
       for (var node in style.nodes) {
-        var stylesheet = parseCss(node.value, errors: cssErrors);
+        var errs = [];
+        var stylesheet = parseCss(node.value, errors: errs);
 
-        if (!cssErrors.isEmpty) {
+        if (!errs.isEmpty) {
           // TODO(terry): Enable below to fix problems in CSS checked mode.
           // for (var error in cssErrors) {
           //   out.displayLine('       Fix it : $error');
           // }
           // out.displayLine("   $filename   --no-checked ONLY");
 
-          cssErrors = [];
-          stylesheet = parseCss(node.value, errors: cssErrors,
+          stylesheet = parseCss(node.value, errors: errs,
               opts: ['--no-colors', 'memory']);
           checked = false;
         }
@@ -116,14 +115,14 @@ class SuiteTest {
         // An error is a problem; emit the error(s) as the expect's reason
         // parameter.
         String allErrors = null;
-        if (!cssErrors.isEmpty) {
+        if (!errs.isEmpty) {
           StringBuffer errors = new StringBuffer(directoryName);
-          for (var error in cssErrors) {
+          for (var error in errs) {
             errors.write(">> ERROR ${filePath.filename} : $error\n");
           }
           allErrors = errors.toString();
         }
-        expect(cssErrors.isEmpty, true, reason: allErrors);
+        expect(errs.isEmpty, true, reason: allErrors);
 
         expect(stylesheet != null, true, reason: directoryName);
 
@@ -155,7 +154,7 @@ class SuiteTest {
         }
         orgCssBuff.write(orgCss);
 
-        for (var error in cssErrors) {
+        for (var error in errs) {
           expect('', 'CSS ERROR: $error', reason: directoryName);
         }
       }
