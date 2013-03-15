@@ -107,7 +107,7 @@ class SuiteTest {
           // }
           // out.displayLine("   $filename   --no-checked ONLY");
 
-          stylesheet = parseCss(node.value, errors: errs,
+          stylesheet = parseCss(node.value, errors: errs..clear(),
               opts: ['--no-colors', 'memory']);
           checked = false;
         }

@@ -25,7 +25,7 @@ Map<String, Object> _ExeceptionMatches = {
     '#one { display: none; counter-increment: c; } '
     '#two:before { content: counter(c); }',
   'quotes-page-001.xht' :                         // Special quotes handling.
-    '#test { border: solid blue; quotes: """ """ "\'" "\'"; } '
+    '#test { border: solid blue; quotes: "\\"" "\\"" "\'" "\'"; } '
     '#test div:before { content: open-quote; } '
     '#test div:after { content: close-quote; } '
     '#reference { border: solid orange; }',
