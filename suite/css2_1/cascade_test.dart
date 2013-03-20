@@ -13,20 +13,10 @@ import '../suite_files.dart';
 Map<String, Object> _ExeceptionMatches = {
   'at-import-003.xht' :                 // Import format different.
     '@import url(support/at-import-002.css);',
-  'at-import-004.xht' :                 // Import format different.
-    '@import url("support/at-import-004.css")print;',
-  'at-import-005.xht' :                 // Import format different.
-    '@import url("support/at-import-005.css")all;',
-  'at-import-006.xht' :                 // Import format different.
-    '@import url("support/at-import-006.css")screen;',
   'at-import-007.xht' : SKIP_TEST,      // TODO(terry): Enable this test.
-  'at-import-008.xht' :                 // Import format different.
-    '@import url("support/a-green.css")print;',
   'at-import-009.xht' : SKIP_TEST,      // TODO(terry): Enable this test.
-  'at-import-010.xht' : SKIP_TEST,      // TODO(terry): Enable this test.
-  'at-import-011.xht' : SKIP_TEST,      // TODO(terry): Enable this test.
-  'cascade-007.xht' : SKIP_TEST,        // TODO(terry): Enable this test.
-  'cascade-012.xht' : SKIP_TEST,        // TODO(terry): Enable this test.
+  'cascade-012.xht' :                   // Import format different.
+    '@import url(support/cascade-012.css); .test { color: red; }',
   'html-attribute-019.xht' : completeFixup,
   'specificity-001.xht' : stripSpacesAndComments,
   'specificity-002.xht' : stripSpacesAndComments,

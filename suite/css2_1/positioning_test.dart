@@ -11,7 +11,10 @@ import '../../testing.dart';
 import '../suite_files.dart';
 
 Map<String, Object> _ExeceptionMatches = {
-  'position-fixed-004.xht' : SKIP_TEST,         // TODO(terry): Enable test.
+  'position-fixed-003.xht' :                    // Emitter spacing.
+    '#filler { height: 6000px; margin: 10px; } '
+    '@media handheld, projection, screen, tty, tv { '
+    '#div1 { background: blue; height: 1.5em; position: fixed; top: 3em; } }',
 };
 
 main() {
