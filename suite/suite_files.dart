@@ -222,7 +222,7 @@ class Suite {
   var validTestsSkipped = [];
 
   Suite(this.processDir) {
-    var currDir = new Directory.current();
+    var currDir = Directory.current;
     suiteDir = new Directory('${currDir.path}/${options.dir}/$processDir');
   }
 
