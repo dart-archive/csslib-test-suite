@@ -19,12 +19,10 @@ DIR=$( cd $( dirname "${BASH_SOURCE[0]}" ) && pwd )
 DART_FLAGS="--checked"
 TEST_PATTERN=$1
 
-pushd $DIR
+pushd $DIR &> /dev/null
 if [[ ($TEST_PATTERN == "suite") || ($TEST_PATTERN = "") ]]; then
   dart $DART_FLAGS run_all.dart --dir=suite
 else
   dart $DART_FLAGS run_all.dart --dir=suite $TEST_PATTERN
 fi
-popd
-
-echo All tests completed.
+popd &> /dev/null
