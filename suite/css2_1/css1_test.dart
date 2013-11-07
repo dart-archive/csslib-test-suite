@@ -2,15 +2,11 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-library suite_files;
+library css1_test;
 
-import 'dart:io';
-
-import 'package:unittest/unittest.dart';
-import '../../testing.dart';
 import '../suite_files.dart';
 
-Map<String, Object> _ExeceptionMatches = {
+var _ExeceptionMatches = {
   'c11-import-000.xht' : SKIP_TEST,         // TODO(terry): Enable this test.
   'c14-classes-000.xht' : SKIP_TEST,        // TODO(terry): Enable this test.
   'c17-comments-000.xht' : completeFixup,

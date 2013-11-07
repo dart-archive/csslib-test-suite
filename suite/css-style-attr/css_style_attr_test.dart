@@ -1,11 +1,5 @@
-library suite_files;
+library css_sytle_attr_test;
 
-import 'dart:io';
-
-import 'package:html5lib/dom.dart';
-import 'package:html5lib/parser.dart';
-import 'package:unittest/unittest.dart';
-import '../../testing.dart';
 import '../suite_files.dart';
 
 Map<String, Object> _ExeceptionMatches = {

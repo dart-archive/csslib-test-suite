@@ -2,21 +2,17 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-library suite_files;
+library generated_content_test;
 
-import 'dart:io';
-
-import 'package:unittest/unittest.dart';
-import '../../testing.dart';
 import '../suite_files.dart';
 
-Map<String, Object> _ExeceptionMatches = {
-  'content-096.xht' : SKIP_TEST,                  // TODO(terry): ENable test.
-  'content-156.xht' : SKIP_TEST,                  // TODO(terry): ENable test.
-  'content-157.xht' : SKIP_TEST,                  // TODO(terry): ENable test.
-  'content-158.xht' : SKIP_TEST,                  // TODO(terry): ENable test.
-  'content-159.xht' : SKIP_TEST,                  // TODO(terry): ENable test.
-  'content-173.xht' : SKIP_TEST,                  // TODO(terry): ENable test.
+var _ExeceptionMatches = {
+  'content-096.xht' : SKIP_TEST,                  // TODO(terry): Enable test.
+  'content-156.xht' : SKIP_TEST,                  // TODO(terry): Enable test.
+  'content-157.xht' : SKIP_TEST,                  // TODO(terry): Enable test.
+  'content-158.xht' : SKIP_TEST,                  // TODO(terry): Enable test.
+  'content-159.xht' : SKIP_TEST,                  // TODO(terry): Enable test.
+  'content-173.xht' : SKIP_TEST,                  // TODO(terry): Enable test.
   'content-attr-002.xht' : SKIP_TEST,             // TODO(terry): Enable test.
   'content-inherit-001.xht' : replaceQuotes,
   'counters-hidden-001.xht' :                     // Missing semi-colons.

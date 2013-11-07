@@ -2,15 +2,11 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-library suite_files;
+library css3_color_test;
 
-import 'dart:io';
-
-import 'package:unittest/unittest.dart';
-import '../../testing.dart';
 import '../suite_files.dart';
 
-Map<String, Object> _ExeceptionMatches = {
+var _ExeceptionMatches = {
   't41-html4-keywords-a.xht' : replaceColors,
   't421-rgb-func-whitespace-b.xht' :          // Special comment/space handling.
     'html,body { background: black; } '

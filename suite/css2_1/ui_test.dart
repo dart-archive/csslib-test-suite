@@ -2,15 +2,11 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-library suite_files;
+library ui_test;
 
-import 'dart:io';
-
-import 'package:unittest/unittest.dart';
-import '../../testing.dart';
 import '../suite_files.dart';
 
-Map<String, Object> _ExeceptionMatches = {
+var _ExeceptionMatches = {
   'outline-color-002.xht' : completeFixup,
   'outline-color-004.xht' : replaceColors,
   'outline-color-005.xht' : completeFixup,

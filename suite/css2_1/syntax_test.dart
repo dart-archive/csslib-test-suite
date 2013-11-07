@@ -2,17 +2,13 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-library suite_files;
+library syntax_test;
 
-import 'dart:io';
-
-import 'package:unittest/unittest.dart';
-import '../../testing.dart';
 import '../suite_files.dart';
 
 // TODO(terry): Many tests have been disabled because of not handling improper
 //              syntax or encoded charsets, etc.  Need to enable all tests.
-Map<String, Object> _ExeceptionMatches = {
+var _ExeceptionMatches = {
   'at-charset-001.xht' : SKIP_TEST,                     // TODO(terry): Enable.
   'at-charset-002.xht' :
     '@import url(support/at-charset-002.css); div { color: red; }',

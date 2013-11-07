@@ -2,15 +2,11 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-library suite_files;
+library box_display_test;
 
-import 'dart:io';
-
-import 'package:unittest/unittest.dart';
-import '../../testing.dart';
 import '../suite_files.dart';
 
-Map<String, Object> _ExeceptionMatches = {
+var _ExeceptionMatches = {
   'anonymous-boxes-inheritance-001-ref.xht' : // Missing semi after property.
     'div { height: 100px; width: 100px; } '
     'div#blue { background-color: blue; } '

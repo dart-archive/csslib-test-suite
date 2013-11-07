@@ -2,15 +2,11 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-library suite_files;
+library cascasde_test;
 
-import 'dart:io';
-
-import 'package:unittest/unittest.dart';
-import '../../testing.dart';
 import '../suite_files.dart';
 
-Map<String, Object> _ExeceptionMatches = {
+var _ExeceptionMatches = {
   'at-import-003.xht' :                 // Import format different.
     '@import url(support/at-import-002.css);',
   'at-import-007.xht' : SKIP_TEST,      // TODO(terry): Enable this test.

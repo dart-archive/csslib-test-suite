@@ -7,7 +7,8 @@ library suite_files;
 import 'dart:io';
 
 import 'package:html5lib/dom.dart';
-import 'package:html5lib/parser.dart';
+import 'package:html5lib/parser.dart' show HtmlParser;
+import 'package:path/path.dart' as dartPath;
 import 'package:unittest/unittest.dart';
 import 'suite_options.dart';
 import '../testing.dart';
@@ -45,11 +46,11 @@ class _Output {
 }
 
 class SuiteTest {
-  const String CDATA_START = '<![CDATA[ ';
-  const String CDATA_END = ' ]]>';
+  static const String CDATA_START = '<![CDATA[ ';
+  static const String CDATA_END = ' ]]>';
 
   /** Test file running. */
-  final Path filePath;
+  final Uri filePath;
 
   /** Current document of test file. */
   final Document document;
@@ -63,8 +64,16 @@ class SuiteTest {
 
   bool checked = true;
 
-  SuiteTest(Path fPath, this.document, this.expectedCss)
-      : filePath = fPath, directoryName = fPath.directoryPath.toString();
+  SuiteTest(Uri fPath, this.document, this.expectedCss)
+      : filePath = fPath, directoryName = _directoryPath(fPath).toString();
+
+  static String _directoryPath(Uri uri) {
+    var fileName = uri.pathSegments.last;
+    var fileNameIndex = uri.path.lastIndexOf(fileName);
+    return uri.path.substring(0, fileNameIndex);
+  }
+
+  static String _filename(Uri uri) => uri.pathSegments.last;
 
   /**
    * Any test marked as invalid in syntax needs to be skipped need to handle
@@ -100,7 +109,7 @@ class SuiteTest {
         var errs = [];
         var stylesheet = parseCss(node.value, errors: errs);
 
-        if (!errs.isEmpty) {
+        if (errs.isNotEmpty) {
           // TODO(terry): Enable below to fix problems in CSS checked mode.
           // for (var error in cssErrors) {
           //   out.displayLine('       Fix it : $error');
@@ -115,10 +124,10 @@ class SuiteTest {
         // An error is a problem; emit the error(s) as the expect's reason
         // parameter.
         String allErrors = null;
-        if (!errs.isEmpty) {
+        if (errs.isNotEmpty) {
           StringBuffer errors = new StringBuffer(directoryName);
           for (var error in errs) {
-            errors.write(">> ERROR ${filePath.filename} : $error\n");
+            errors.write(">> ERROR ${_filename(filePath)} : $error\n");
           }
           allErrors = errors.toString();
         }
@@ -227,22 +236,23 @@ class Suite {
   }
 
   /** Prepare to process a test file. */
-  void _processFile(File path, Map<String, Object> exceptionMatches) {
+  void _processFile(File path, exceptionMatches) {
     expect(path.existsSync(), true, reason: "File ${path} must exist");
-    Path filePath = new Path(path.fullPathSync());
-    File file = new File.fromPath(filePath);
-    if (filePath.extension == 'xht' || filePath.extension == 'html' ||
-        filePath.extension == 'xml') {
-      var expectedOutput = exceptionMatches[filePath.filename];
+    String filePath = path.path;
+    File file = new File(filePath);
+    var extension = dartPath.extension(file.path);
+    if (extension == '.xht' || extension == '.html' || extension == '.xml') {
+      var filename = dartPath.basenameWithoutExtension(file.path);
+      var expectedOutput = exceptionMatches["$filename$extension"];
       if (expectedOutput != null) {
         // If cssToMatch is equal to SKIP_TEST then skip this test.
         if (expectedOutput != null && expectedOutput == SKIP_TEST) {
-          validTestsSkipped.add(filePath.filename);
+          validTestsSkipped.add(filename);
           return;
         }
       }
 
-      _processTestFile(file, filePath, expectedOutput);
+      _processTestFile(file, new Uri.file(filePath), expectedOutput);
     }
   }
 
@@ -287,27 +297,26 @@ class Suite {
     out.displayLine("", true);
   }
 
-  void _processTestFile(File file, Path filePath, [var cssMatch]) {
+  void _processTestFile(File file, Uri filePath, [var cssMatch]) {
     String contents = file.readAsStringSync();
 
     // Parses an HTML file and returns a DOM-like tree.
     var parser = new HtmlParser(contents);
     var document = parser.parse();
 
-    // TODO(terry): Skip tests in syntax until encoding is handled properly.
-    var skip = filePath.directoryPath.toString().endsWith('css2_1/src/syntax');
     var suiteTest = new SuiteTest(filePath, document, cssMatch);
 
     testsRunning.add(suiteTest);
 
     // Any error(s) is a problem.
     for (var error in parser.errors) {
-      out.displayLine(">> ERROR ${filePath.filename} : $error", true);
+      out.displayLine(">> ERROR ${SuiteTest._filename(filePath)} : $error",
+          true);
     }
     expect(parser.errors.length, 0,
         reason: filePath.toString());
 
-    test(filePath.filename, () {
+    test(SuiteTest._filename(filePath), () {
       suiteTest.testCss();
       finished(suiteTest);
     });

@@ -2,17 +2,13 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-library suite_files;
+library selectors3_test;
 
-import 'dart:io';
-
-import 'package:unittest/unittest.dart';
-import '../../testing.dart';
 import '../suite_files.dart';
 
 // TODO(terry): More tests skipped because of encoding need to be enabled.
 //              Also, some esoteric CSS 3 selector syntax not implemented yet.
-Map<String, Object> _ExeceptionMatches = {
+var _ExeceptionMatches = {
   'css3-modsel-100.xml' : SKIP_TEST,                // TODO(terry): Enable.
   'css3-modsel-100b.xml' : SKIP_TEST,               // TODO(terry): Enable.
   'css3-modsel-101.xml' : SKIP_TEST,                // TODO(terry): Enable.

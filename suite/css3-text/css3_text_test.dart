@@ -2,15 +2,11 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-library suite_files;
+library css3_text_test;
 
-import 'dart:io';
-
-import 'package:unittest/unittest.dart';
-import '../../testing.dart';
 import '../suite_files.dart';
 
-Map<String, Object> _ExeceptionMatches = {
+var _ExeceptionMatches = {
   'text-transform-fullwidth-001.xht' : replaceColors,
   'text-transform-fullwidth-001-ref.xht' : replaceColors,
   'text-transform-kana-001.xht' : replaceColors,

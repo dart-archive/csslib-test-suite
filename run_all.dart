@@ -8,9 +8,7 @@
  */
 library suite_impl;
 
-import 'dart:io';
-import 'package:unittest/unittest.dart';
-import 'package:unittest/compact_vm_config.dart';
+import 'packages/unittest/compact_vm_config.dart';
 import 'testing.dart';
 
 import 'suite/css2_1/backgrounds_test.dart' as backgrounds;
@@ -53,8 +51,8 @@ import 'suite/css3-writing-modes/css3_writing_modes_test.dart' as css3Modes;
 import 'suite/selectors3/selectors3_test.dart' as selectors3;
 import 'suite/suite_options.dart';
 
-main() {
-  options = SuiteOptions.parse(new Options().arguments);
+main(List<String> args) {
+  options = SuiteOptions.parse(args);
   if (options == null) return;
 
   // Match name passed or anything if nothing passed.
