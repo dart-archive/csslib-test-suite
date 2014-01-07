@@ -14,18 +14,16 @@ var _ExeceptionMatches = {
   'content-159.xht' : SKIP_TEST,                  // TODO(terry): Enable test.
   'content-173.xht' : SKIP_TEST,                  // TODO(terry): Enable test.
   'content-attr-002.xht' : SKIP_TEST,             // TODO(terry): Enable test.
-  'content-inherit-001.xht' : replaceQuotes,
   'counters-hidden-001.xht' :                     // Missing semi-colons.
     'body { white-space: nowrap; } '
     'div { counter-reset: c; } '
     '#one { display: none; counter-increment: c; } '
     '#two:before { content: counter(c); }',
   'quotes-page-001.xht' :                         // Special quotes handling.
-    '#test { border: solid blue; quotes: "\\"" "\\"" "\'" "\'"; } '
+    '#test { border: solid blue; quotes: \'"\' \'"\' "\'" "\'"; } '
     '#test div:before { content: open-quote; } '
     '#test div:after { content: close-quote; } '
     '#reference { border: solid orange; }',
-  'quotes-negative-001.xht' : replaceQuotes,
 };
 
 main() {

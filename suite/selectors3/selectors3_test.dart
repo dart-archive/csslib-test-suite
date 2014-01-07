@@ -112,7 +112,6 @@ var _ExeceptionMatches = {
   'css3-modsel-156c.xml' : SKIP_TEST,               // TODO(terry): Enable.
   'css3-modsel-157.xml' : SKIP_TEST,                // TODO(terry): Enable.
   'css3-modsel-158.xml' : SKIP_TEST,                // TODO(terry): Enable.
-  'css3-modsel-169a.xml' : replaceQuotes,
   'css3-modsel-170.xml' : SKIP_TEST,                // TODO(terry): Enable.
   'css3-modsel-170c.xml' : SKIP_TEST,               // TODO(terry): Enable.
   'css3-modsel-172a.xml' : SKIP_TEST,               // TODO(terry): Enable.
@@ -144,8 +143,6 @@ var _ExeceptionMatches = {
   'css3-modsel-35.xml' : SKIP_TEST,                 // TODO(terry): Enable.
   'css3-modsel-36.xml' : SKIP_TEST,                 // TODO(terry): Enable.
   'css3-modsel-37.xml' : SKIP_TEST,                 // TODO(terry): Enable.
-  'css3-modsel-39a.xml' : replaceQuotes,
-  'css3-modsel-39c.xml' :    replaceQuotes,
   'css3-modsel-30.xml' : SKIP_TEST,                 // TODO(terry): Enable.
   'css3-modsel-43.xml' : SKIP_TEST,                 // TODO(terry): Enable.
   'css3-modsel-44.xml' : SKIP_TEST,                 // TODO(terry): Enable.
