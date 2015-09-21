@@ -4,8 +4,9 @@ homepage: https://github.com/dart-lang/csslib-test-suite
 description: CSS parsing test suite (originated from W3C).
 version: 0.9.0
 dependencies:
-  csslib: any
-  html5lib: any
+  csslib:
+    git: https://github.com/dart-lang/csslib
+  html5lib: ^0.12.1
 dev_dependencies:
   unittest: ^0.11.0
 environment:
