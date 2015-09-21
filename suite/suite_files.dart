@@ -80,7 +80,7 @@ class SuiteTest {
    * encoding and richer error recovering for bad CSS.
    */
   bool _skipTest() {
-    for (var meta in document.queryAll('meta')) {
+    for (var meta in document.querySelectorAll('meta')) {
       if (meta.attributes.containsKey('content')) {
         if (meta.attributes['content'].contains('invalid')) {
           if (options.verbose || options.displayInvalidTests) {
@@ -97,9 +97,9 @@ class SuiteTest {
     // TODO(terry): Need to remove at some point; skipping tests marked invalid.
     if (_skipTest()) return;
 
-    List styles = document.queryAll('style');
+    List styles = document.querySelectorAll('style');
     if (styles.length == 0) {
-      styles = document.queryAll('cssrules');
+      styles = document.querySelectorAll('cssrules');
     }
     bool multiStyles = styles.length > 1;
     var orgCssBuff = new StringBuffer();
@@ -107,7 +107,7 @@ class SuiteTest {
     for (var style in styles) {
       for (var node in style.nodes) {
         var errs = [];
-        var stylesheet = parseCss(node.value, errors: errs);
+        var stylesheet = parseCss(node.data, errors: errs);
 
         if (errs.isNotEmpty) {
           // TODO(terry): Enable below to fix problems in CSS checked mode.
@@ -116,7 +116,7 @@ class SuiteTest {
           // }
           // out.displayLine("   $filename   --no-checked ONLY");
 
-          stylesheet = parseCss(node.value, errors: errs..clear(),
+          stylesheet = parseCss(node.data, errors: errs..clear(),
               opts: ['--no-colors', 'memory']);
           checked = false;
         }
@@ -135,7 +135,7 @@ class SuiteTest {
 
         expect(stylesheet != null, true, reason: directoryName);
 
-        var orgCss = _normalizeCss(node.value);
+        var orgCss = _normalizeCss(node.data);
 
         // Compare the CSS using a compressed emitter.
         var newCssAsCompact = compactCss(stylesheet);

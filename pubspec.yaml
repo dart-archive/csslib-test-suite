@@ -7,6 +7,6 @@ dependencies:
   csslib: any
   html5lib: any
 dev_dependencies:
-  unittest: any
+  unittest: ^0.11.0
 environment:
   sdk: ">=1.0.0 <2.0.0"

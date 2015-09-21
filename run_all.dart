@@ -8,7 +8,7 @@
  */
 library suite_impl;
 
-import 'packages/unittest/compact_vm_config.dart';
+import 'package:unittest/compact_vm_config.dart';
 import 'testing.dart';
 
 import 'suite/css2_1/backgrounds_test.dart' as backgrounds;

@@ -19,8 +19,11 @@ useMockMessages() {
  * tests (by default) will ensure that the CSS is really valid.
  */
 StyleSheet parseCss(String cssInput, {List errors, List opts}) =>
-  parse(cssInput, errors: errors, options: opts == null ?
-      ['--no-colors', '--checked', '--warnings_as_errors', 'memory'] : opts);
+    parse(cssInput,
+        errors: errors,
+        options: PreprocessorOptions.parse(opts == null
+            ? ['--no-colors', '--checked', '--warnings_as_errors', 'memory']
+            : opts));
 
 /**
  * Helper function to emit compact (non-pretty printed) CSS for suite test
